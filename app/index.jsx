@@ -6,56 +6,69 @@ import {
   View,
   Image,
   TouchableOpacity,
+  
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import CustomButton from "../components/CustomButton";
+import { Link } from "expo-router"; 
+
 
 export default function App() {
   return (
-    <SafeAreaView>
-      <ScrollView contentContainerStyle={{ height: "100%" }}>
+    <SafeAreaView contentContainerStyle={{ height: "100%" }}>
+      <ScrollView>
         {/* Background */}
-        <View style={styles.v3_26}>
-          <Image source={require("../assets/images/v9_0.png")} style={styles.v9_0} />
+        <View style={styles.mainContain}>
+          <Image
+            source={require("../assets/images/Photo BG.jpg")}
+            style={styles.imageBackgr}
+          />
           {/* White section */}
-          <View style={styles.v9_1}></View>
+          {/* <CustomButton title={"Registration"} /> */}
+          <View style={styles.styleContainerLogin}>
+            <CustomButton title={"Sign In"} />
+            <View style={styles.linkSignUp}>
+              <Text>Don't have an account?</Text>
+              <Link href="/sign-up">Sign Up</Link>
+            </View>
+          </View>
 
           {/* Header */}
-          <View style={styles.v3_27}>
-           
+          {/* <View style={styles.v3_27}>
             <View style={styles.v3_29}></View>
-          </View>
+          </View> */}
 
           {/* Registration Title */}
-          <View style={styles.v3_49}>
-            <Text style={styles.v3_51}>Реєстрація</Text>
-          </View>
+          {/* <View style={styles.v3_49}>
+            <Text style={styles.v3_51}>Registration</Text>
+          </View> */}
 
           {/* Login Input */}
-          <View style={styles.v3_56}>
+          {/* <View style={styles.v3_56}>
             <View style={styles.v3_57}></View>
             <Text style={styles.v3_58}>Логін</Text>
-          </View>
+          </View> */}
 
           {/* Email Input */}
-          <View style={styles.v3_60}>
+          {/* <View style={styles.v3_60}>
             <View style={styles.v3_61}></View>
             <Text style={styles.v3_62}>Адреса електронної пошти</Text>
-          </View>
+          </View> */}
 
           {/* Password Input */}
-          <View style={styles.v3_64}>
+          {/* <View style={styles.v3_64}>
             <View style={styles.v3_65}></View>
             <Text style={styles.v3_66}>Пароль</Text>
             <Text style={styles.v3_67}>Показати</Text>
-          </View>
+          </View> */}
 
           {/* Register Button */}
-          <TouchableOpacity style={styles.v3_201}>
+          {/* <TouchableOpacity style={styles.v3_201}>
             <Text style={styles.v3_202}>Зареєстуватися</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
           {/* Already have an account */}
-          <Text style={styles.v3_203}>Вже є акаунт? Увійти</Text>
+          {/* <Text style={styles.v3_203}>Вже є акаунт? Увійти</Text> */}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -63,28 +76,35 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  v3_26: {
-    width: 375,
-    height: 812,
-    backgroundColor: "rgba(255,255,255,1)",
+  mainContain: {
+    width: "100%",
+    minHeight: 900,
+    // backgroundColor: "rgba(255,255,255,1)",
     position: "relative",
   },
-  v9_0: {
-    width: 375,
-    height: 812,
+  imageBackgr: {
+    width: "100%",
+    height: "100%",
     position: "absolute",
-    top: 0,
-    left: 0,
-    resizeMode: "cover",
+    resizeMode: "contain",
   },
-  v9_1: {
-    width: 375,
+  styleContainerLogin: {
+    width: "100%",
     height: 549,
     backgroundColor: "rgba(255,255,255,1)",
-    position: "absolute",
-    top: 263,
+position: "relative",
+    marginTop: "auto",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
+  },
+  linkSignUp: {
+    
+    display: "flex",
+    flexDirection: "row",
+    gap: 2,
+    justifyContent: "center",
+    alignItems: "center",
+    
   },
   v3_27: {
     width: 375,
@@ -106,6 +126,10 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,1)",
   },
   v3_49: {
+    width: 343,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     position: "absolute",
     top: 355,
     left: 16,
