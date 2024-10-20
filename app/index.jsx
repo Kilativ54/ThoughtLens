@@ -6,12 +6,10 @@ import {
   View,
   Image,
   TouchableOpacity,
-  
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../components/CustomButton";
-import { Link } from "expo-router"; 
-
+import { Link } from "expo-router";
 
 export default function App() {
   return (
@@ -78,33 +76,31 @@ export default function App() {
 const styles = StyleSheet.create({
   mainContain: {
     width: "100%",
-    minHeight: 900,
+    minHeight: 1000,
     // backgroundColor: "rgba(255,255,255,1)",
     position: "relative",
   },
   imageBackgr: {
     width: "100%",
-    height: "100%",
+    minHeight: 549,
     position: "absolute",
-    resizeMode: "contain",
+    resizeMode: "cover",
   },
   styleContainerLogin: {
     width: "100%",
     height: 549,
     backgroundColor: "rgba(255,255,255,1)",
-position: "relative",
+    position: "relative",
     marginTop: "auto",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
   },
   linkSignUp: {
-    
     display: "flex",
     flexDirection: "row",
     gap: 2,
     justifyContent: "center",
     alignItems: "center",
-    
   },
   v3_27: {
     width: 375,
