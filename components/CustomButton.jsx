@@ -16,11 +16,14 @@ const CustomButton = ({ title }) => {
 };
 const styles = StyleSheet.create({
   styleButton: {
-    width: 343,
+    minWidth: 343,
+    maxWidth: 600,
+    marginRight: 16,
+    marginLeft: 16,
     height: 51,
     backgroundColor: "rgba(255,108,0,1)",
     borderRadius: 100,
-   
+
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 16,

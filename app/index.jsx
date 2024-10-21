@@ -10,6 +10,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../components/CustomButton";
 import { Link } from "expo-router";
+import  FormField  from "../components/FormField";
 
 export default function App() {
   return (
@@ -24,6 +25,13 @@ export default function App() {
           {/* White section */}
           {/* <CustomButton title={"Registration"} /> */}
           <View style={styles.styleContainerLogin}>
+            {/* Password Input */}
+            {/* <View style={styles.v3_64}>
+            <View style={styles.v3_65}></View>
+            <Text style={styles.v3_66}>Пароль</Text>
+            <Text style={styles.v3_67}>Показати</Text>
+          </View> */}
+            <FormField title={"Password"} placeholder={"Password"}/> 
             <CustomButton title={"Sign In"} />
             <View style={styles.linkSignUp}>
               <Text>Don't have an account?</Text>
@@ -179,9 +187,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   v3_64: {
-    position: "absolute",
-    top: 555,
-    left: 16,
+    // position: "absolute",
+    // top: 555,
+    // left: 16,
     width: 343,
     height: 50,
   },
@@ -193,16 +201,16 @@ const styles = StyleSheet.create({
     borderColor: "rgba(231,231,231,1)",
   },
   v3_66: {
-    position: "absolute",
-    top: 16,
-    left: 16,
+    // position: "absolute",
+    // top: 16,
+    // left: 16,
     color: "rgba(189,189,189,1)",
     fontSize: 16,
   },
   v3_67: {
-    position: "absolute",
-    top: 16,
-    left: 255,
+    // position: "absolute",
+    // top: 16,
+    // left: 255,
     color: "rgba(27,67,113,1)",
     fontSize: 16,
   },
