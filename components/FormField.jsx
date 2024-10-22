@@ -17,14 +17,15 @@ const FormField = ({
   handleChangeText,
   otherStyles,
   placeholder,
+  marginBottom = 16, // Default value for marginBottom
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState(false); // Track focus state
 
   return (
-    <View style={[styles.container, otherStyles]}>
-      <Text style={styles.title}>{title}</Text>
+    <View style={[styles.container, otherStyles, { marginBottom }]}>
+      {/* <Text style={styles.title}>{title}</Text> */}
 
       <View
         style={[
@@ -60,10 +61,10 @@ const FormField = ({
 const styles = StyleSheet.create({
   container: {
     width: 343,
-    marginVertical: 8,
+    // marginVertical: 8,
     marginRight: "auto",
     marginLeft: "auto",
-    marginBottom: 43, // equivalent to "space-y-2"
+    // Removed static marginBottom, now controlled by props
   },
   title: {
     fontSize: 16, // equivalent to "text-base"
@@ -75,15 +76,15 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 64, // equivalent to "h-16"
     paddingHorizontal: 16, // equivalent to "px-4"
-    backgroundColor: "E8E8E8", // equivalent to "bg-black-100"
+    backgroundColor: "#E8E8E8", // Background color
     borderRadius: 10, // equivalent to "rounded-2xl"
     flexDirection: "row",
     alignItems: "center",
   },
   input: {
     flex: 1,
-    color: "212121", // equivalent to "text-white"
-    fontSize: 16, // equivalent to "text-base"
+    color: "#212121", // Text color
+    fontSize: 16, // Font size
   },
   icon: {
     width: 24, // equivalent to "w-6"

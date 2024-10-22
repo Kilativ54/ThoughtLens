@@ -10,7 +10,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../components/CustomButton";
 import { Link } from "expo-router";
-import  FormField  from "../components/FormField";
+import FormField from "../components/FormField";
 
 export default function App() {
   return (
@@ -31,7 +31,12 @@ export default function App() {
             <Text style={styles.v3_66}>Пароль</Text>
             <Text style={styles.v3_67}>Показати</Text>
           </View> */}
-            <FormField title={"Password"} placeholder={"Password"}/> 
+            <FormField
+              otherStyles={{ marginBottom: 16 }}
+              marginBottom={16}
+              placeholder={"Email"}
+            />
+            <FormField marginBottom={43} placeholder={"Password"} />
             <CustomButton title={"Sign In"} />
             <View style={styles.linkSignUp}>
               <Text>Don't have an account?</Text>
@@ -109,6 +114,9 @@ const styles = StyleSheet.create({
     gap: 2,
     justifyContent: "center",
     alignItems: "center",
+  },
+  marginButtonPasword: {
+    marginBottom: 43,
   },
   v3_27: {
     width: 375,
