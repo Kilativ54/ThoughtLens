@@ -31,6 +31,7 @@ export default function App() {
             <Text style={styles.v3_66}>Пароль</Text>
             <Text style={styles.v3_67}>Показати</Text>
           </View> */}
+            <Text style={styles.textSign}>Sign in</Text>
             <FormField
               otherStyles={{ marginBottom: 16 }}
               marginBottom={16}
@@ -117,6 +118,14 @@ const styles = StyleSheet.create({
   },
   marginButtonPasword: {
     marginBottom: 43,
+  },
+  textSign: {
+    marginTop: 32,
+    color: '212121', 
+    fontSize: 30,
+    fontWeight: "500",
+    textAlign: "center",
+    marginBottom: 33,
   },
   v3_27: {
     width: 375,
