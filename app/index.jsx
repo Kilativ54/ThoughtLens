@@ -40,8 +40,10 @@ export default function App() {
             <FormField marginBottom={43} placeholder={"Password"} />
             <CustomButton title={"Sign In"} />
             <View style={styles.linkSignUp}>
-              <Text>Don't have an account?</Text>
-              <Link href="/sign-up">Sign Up</Link>
+              <Text style={styles.textUnderButtom}>Don't have an account?</Text>
+              <Link style={styles.textUnderButtom} href="/sign-up">
+                Sign Up
+              </Link>
             </View>
           </View>
 
@@ -102,7 +104,7 @@ const styles = StyleSheet.create({
   },
   styleContainerLogin: {
     width: "100%",
-    height: 549,
+    height: 680,
     backgroundColor: "rgba(255,255,255,1)",
     position: "relative",
     marginTop: "auto",
@@ -121,11 +123,15 @@ const styles = StyleSheet.create({
   },
   textSign: {
     marginTop: 32,
-    color: '212121', 
+    color: "212121",
     fontSize: 30,
     fontWeight: "500",
     textAlign: "center",
     marginBottom: 33,
+  },
+  textUnderButtom: {
+    color: "rgba(27,67,113,1)",
+    fontSize: 16,
   },
   v3_27: {
     width: 375,
@@ -244,13 +250,6 @@ const styles = StyleSheet.create({
   },
   v3_202: {
     color: "rgba(255,255,255,1)",
-    fontSize: 16,
-  },
-  v3_203: {
-    position: "absolute",
-    top: 715,
-    left: 108,
-    color: "rgba(27,67,113,1)",
     fontSize: 16,
   },
 });

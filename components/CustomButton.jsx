@@ -10,7 +10,7 @@ const CustomButton = ({ title }) => {
       style={styles.styleButton}
       // disabled={isLOading}
     >
-      <Text style={styles.v3_202}>{title}</Text>
+      <Text style={styles.styleText}>{title}</Text>
     </TouchableOpacity>
   );
 };
