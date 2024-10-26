@@ -21,6 +21,7 @@ export default function App() {
           <Image
             source={require("../assets/images/Photo BG.jpg")}
             style={styles.imageBackgr}
+            resizeMode={"cover"}
           />
           {/* White section */}
           {/* <CustomButton title={"Registration"} /> */}
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
     width: "100%",
     minHeight: 549,
     position: "absolute",
-    resizeMode: "cover",
+    // resizeMode: "cover",
   },
   styleContainerLogin: {
     width: "100%",
