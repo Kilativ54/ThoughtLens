@@ -33,6 +33,22 @@ const SignUp = () => {
             <Text style={styles.v3_66}>Пароль</Text>
             <Text style={styles.v3_67}>Показати</Text>
           </View> */}
+            <View style={styles.containerAvatar}>
+              <Image
+                style={styles.avatar}
+                resizeMode="contain"
+                source={require("../assets/images/avatar.jpg")}
+                width={120}
+                height={120}
+              />
+              <Image
+                style={styles.addIcon}
+                resizeMode="contain"
+                source={require("../assets/icons/add.png")}
+                width={25}
+                height={25}
+              />
+            </View>
             <Text style={styles.textSign}>Sign up</Text>
             <FormField
               otherStyles={{ marginBottom: 16 }}
@@ -133,7 +149,6 @@ const styles = StyleSheet.create({
     marginBottom: 43,
   },
   textSign: {
-    marginTop: 32,
     color: "212121",
     fontSize: 30,
     fontWeight: "500",
@@ -143,6 +158,21 @@ const styles = StyleSheet.create({
   textUnderButtom: {
     color: "rgba(27,67,113,1)",
     fontSize: 16,
+  },
+  containerAvatar: {
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: -60,
+    marginBottom: 32,
+  },
+  avatar: {
+    borderRadius: 16,
+    position: "relative",
+  },
+  addIcon: {
+    position: "absolute",
+    top: 81,
+    left: 107,
   },
   v3_27: {
     width: 375,
