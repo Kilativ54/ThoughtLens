@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../components/CustomButton";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import FormField from "../components/FormField";
 
 const SignUp = () => {
@@ -62,7 +62,7 @@ const SignUp = () => {
             />
             <FormField marginBottom={43} placeholder={"Password"} />
             <CustomButton
-              handlePress={() => router.push("/app/(tabs)/home.jsx")}
+              handlePress={() => router.push("/home")}
               title={"Sign up"}
             />
             <View style={styles.linkSignUp}>
