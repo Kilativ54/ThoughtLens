@@ -37,7 +37,9 @@ const FormField = ({
           style={styles.input}
           value={value}
           placeholder={placeholder}
-          placeholderTextColor="#7b7b8b"
+          placeholderFontSize={16}
+          placecholderFontFamily="Roboto-Regular"
+          placeholderTextColor="#BDBDBD"
           onChangeText={handleChangeText}
           secureTextEntry={placeholder === "Password" && !showPassword}
           onFocus={() => setIsFocused(true)} // Set focus state to true
@@ -82,6 +84,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   input: {
+    fontFamily: "Roboto-Regular",
     flex: 1,
     color: "#212121", // Text color
     fontSize: 16, // Font size

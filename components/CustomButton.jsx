@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     // position: "absolute",
   },
   styleText: {
+    fontFamily: "Roboto-Regular",
     color: "rgba(255,255,255,1)",
     fontSize: 16,
   },

@@ -149,6 +149,7 @@ const styles = StyleSheet.create({
     marginBottom: 43,
   },
   textSign: {
+    fontFamily: "Roboto-Medium",
     color: "212121",
     fontSize: 30,
     fontWeight: "500",
@@ -156,6 +157,7 @@ const styles = StyleSheet.create({
     marginBottom: 33,
   },
   textUnderButtom: {
+    fontFamily: "Roboto-Regular",
     color: "rgba(27,67,113,1)",
     fontSize: 16,
   },
