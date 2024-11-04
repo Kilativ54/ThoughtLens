@@ -7,15 +7,24 @@ const TabsLayout = () => {
       <Tabs>
         <Tabs.Screen
           name="home"
-          options={{ title: "Home", headerShown: false }}
+          options={{
+            title: "Home",
+            headerShown: false,
+          }}
         />
         <Tabs.Screen
           name="create"
-          options={{ title: "Create", headerShown: false }}
+          options={{
+            title: "Create",
+            headerShown: false,
+          }}
         />
         <Tabs.Screen
-          name="home"
-          options={{ title: "Home", headerShown: false }}
+          name="profile"
+          options={{
+            title: "Profile",
+            headerShown: false,
+          }}
         />
       </Tabs>
     </>

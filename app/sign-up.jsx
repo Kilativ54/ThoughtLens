@@ -61,7 +61,10 @@ const SignUp = () => {
               placeholder={"Email"}
             />
             <FormField marginBottom={43} placeholder={"Password"} />
-            <CustomButton title={"Sign up"} />
+            <CustomButton
+              handlePress={() => router.push("/app/(tabs)/home.jsx")}
+              title={"Sign up"}
+            />
             <View style={styles.linkSignUp}>
               <Text style={styles.textUnderButtom}>
                 Have an account already ?

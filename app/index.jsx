@@ -11,8 +11,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../components/CustomButton";
 import { Link } from "expo-router";
 import FormField from "../components/FormField";
+import { router } from "expo-router";
 
 export default function App() {
+  const submit = async () => {
+    try {
+      router.replace("/app/(tabs)/home.jsx");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    }
+  };
   return (
     <SafeAreaView contentContainerStyle={{ height: "100%" }}>
       <ScrollView>
@@ -39,7 +47,10 @@ export default function App() {
               placeholder={"Email"}
             />
             <FormField marginBottom={43} placeholder={"Password"} />
-            <CustomButton title={"Sign In"} />
+            <CustomButton
+              handlePress={() => router.push("/home")}
+              title={"Sign In"}
+            />
             <View style={styles.linkSignUp}>
               <Text style={styles.textUnderButtom}>Don't have an account?</Text>
               <Link style={styles.textUnderButtom} href="/sign-up">

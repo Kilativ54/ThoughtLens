@@ -2,11 +2,11 @@ import { TouchableOpacity, Text } from "react-native";
 import React from "react";
 import { StyleSheet } from "react-native";
 
-const CustomButton = ({ title }) => {
+const CustomButton = ({ title, handlePress }) => {
   return (
     <TouchableOpacity
       // activeOpacity={0.7}
-      // onPress={handlePress}
+      onPress={handlePress}
       style={styles.styleButton}
       // disabled={isLOading}
     >
