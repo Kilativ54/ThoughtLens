@@ -12,8 +12,35 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../components/CustomButton";
 import { Link, router } from "expo-router";
 import FormField from "../components/FormField";
+import { useState } from "react";
+import { Alert } from "react-native";
+import { createUser } from "../lib/appwrite";
 
 const SignUp = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+  const submit = async () => {
+    if (form.username === "" || form.email === "" || form.password === "") {
+      Alert.alert("Error", "Please fill in all the fields");
+    }
+
+    setIsSubmitting(true);
+    try {
+      const result = await createUser(form.email, form.password, form.username);
+      // setUser(result);
+      // setIsLoggedIn(true);
+
+      router.replace("./(tabs)/home");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <SafeAreaView contentContainerStyle={{ height: "100%" }}>
       <ScrollView>
@@ -54,17 +81,24 @@ const SignUp = () => {
               otherStyles={{ marginBottom: 16 }}
               marginBottom={16}
               placeholder={"Login"}
+              value={form.username}
+              handleChangeText={(text) => setForm({ ...form, username: text })}
             />
             <FormField
               otherStyles={{ marginBottom: 16 }}
               marginBottom={16}
               placeholder={"Email"}
+              value={form.email}
+              handleChangeText={(text) => setForm({ ...form, email: text })}
+              keyboardType="email-address"
             />
-            <FormField marginBottom={43} placeholder={"Password"} />
-            <CustomButton
-              handlePress={() => router.push("/home")}
-              title={"Sign up"}
+            <FormField
+              value={form.password}
+              handleChangeText={(text) => setForm({ ...form, password: text })}
+              marginBottom={43}
+              placeholder={"Password"}
             />
+            <CustomButton handlePress={submit} title={"Sign up"} />
             <View style={styles.linkSignUp}>
               <Text style={styles.textUnderButtom}>
                 Have an account already ?
@@ -153,7 +187,7 @@ const styles = StyleSheet.create({
   },
   textSign: {
     fontFamily: "Roboto-Medium",
-    color: "212121",
+    color: "#212121",
     fontSize: 30,
     fontWeight: "500",
     textAlign: "center",

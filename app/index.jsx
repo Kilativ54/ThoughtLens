@@ -12,13 +12,34 @@ import CustomButton from "../components/CustomButton";
 import { Link } from "expo-router";
 import FormField from "../components/FormField";
 import { router } from "expo-router";
+import { useState } from "react";
+import { Alert } from "react-native";
+import { signIn, getCurrentUser } from "../lib/appwrite";
 
 export default function App() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
   const submit = async () => {
+    if (form.email === "" || form.password === "") {
+      Alert.alert("Error", "Please fill in all the fields");
+    }
+
+    setIsSubmitting(true);
     try {
-      router.replace("/app/(tabs)/home.jsx");
+      await signIn(form.email, form.password);
+      const result = await getCurrentUser();
+      // setUser(result);
+      // setIsLoggedIn(true);
+
+      router.replace("/home");
     } catch (error) {
       Alert.alert("Error", error.message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
   return (
@@ -45,12 +66,17 @@ export default function App() {
               otherStyles={{ marginBottom: 16 }}
               marginBottom={16}
               placeholder={"Email"}
+              value={form.email}
+              handleChangeText={(e) => setForm({ ...form, email: e })}
+              keyboardType="email-address"
             />
-            <FormField marginBottom={43} placeholder={"Password"} />
-            <CustomButton
-              handlePress={() => router.push("/home")}
-              title={"Sign In"}
+            <FormField
+              marginBottom={43}
+              placeholder={"Password"}
+              value={form.password}
+              handleChangeText={(e) => setForm({ ...form, password: e })}
             />
+            <CustomButton handlePress={submit} title={"Sign In"} />
             <View style={styles.linkSignUp}>
               <Text style={styles.textUnderButtom}>Don't have an account?</Text>
               <Link style={styles.textUnderButtom} href="/sign-up">
