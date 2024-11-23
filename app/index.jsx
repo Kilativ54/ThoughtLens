@@ -11,17 +11,31 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../components/CustomButton";
 import { Link } from "expo-router";
 import FormField from "../components/FormField";
-import { router } from "expo-router";
+import { router, Redirect } from "expo-router";
 import { useState } from "react";
 import { Alert } from "react-native";
-import { signIn, getCurrentUser } from "../lib/appwrite";
+import { signIn, getCurrentUser, signOut } from "../lib/appwrite";
+import { useGlobalContext } from "../contex/GlobalProvider";
 
 export default function App() {
+  //  return <Redirect href="./(tabs)/home" />;
+  const { isLoading, isLoggedIn } = useGlobalContext();
+  // if (!isLoading && isLoggedIn) return <Redirect href="./(tabs)/home" />;
+  const { setUser, setIsLoggedIn } = useGlobalContext();
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
+
+  const logout = async () => {
+    await signOut();
+    setUser(null);
+    setIsLoggedIn(false);
+
+    // router.replace("/sign-in");
+  };
 
   const submit = async () => {
     if (form.email === "" || form.password === "") {
@@ -32,8 +46,8 @@ export default function App() {
     try {
       await signIn(form.email, form.password);
       const result = await getCurrentUser();
-      // setUser(result);
-      // setIsLoggedIn(true);
+      setUser(result);
+      setIsLoggedIn(true);
 
       router.replace("/home");
     } catch (error) {
@@ -82,6 +96,10 @@ export default function App() {
               <Link style={styles.textUnderButtom} href="/sign-up">
                 Sign Up
               </Link>
+              {/* <TouchableOpacity
+                style={styles.logoutButton}
+                onPress={logout}
+              ></TouchableOpacity> */}
             </View>
           </View>
 
@@ -291,5 +309,14 @@ const styles = StyleSheet.create({
   v3_202: {
     color: "rgba(255,255,255,1)",
     fontSize: 16,
+  },
+  logoutButton: {
+    width: 100,
+    height: 100,
+    backgroundColor: "rgba(255,108,0,1)",
+    borderRadius: 100,
+
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

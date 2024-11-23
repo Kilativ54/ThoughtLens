@@ -15,8 +15,11 @@ import FormField from "../components/FormField";
 import { useState } from "react";
 import { Alert } from "react-native";
 import { createUser } from "../lib/appwrite";
+import { useGlobalContext } from "../contex/GlobalProvider";
 
 const SignUp = () => {
+const { setUser, setIsLoggedIn } = useGlobalContext();
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     username: "",
@@ -31,8 +34,8 @@ const SignUp = () => {
     setIsSubmitting(true);
     try {
       const result = await createUser(form.email, form.password, form.username);
-      // setUser(result);
-      // setIsLoggedIn(true);
+      setUser(result);
+      setIsLoggedIn(true);
 
       router.replace("./(tabs)/home");
     } catch (error) {
