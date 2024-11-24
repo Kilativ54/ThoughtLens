@@ -12,6 +12,7 @@ import { useState } from "react";
 import { signOut } from "../../lib/appwrite";
 import { router } from "expo-router";
 import { Alert } from "react-native";
+import {PictureCard} from "../../components/PictureCard";
 
 
 const Home = () => {
@@ -63,7 +64,7 @@ const Home = () => {
                   />
                 </TouchableOpacity>
               </View>
-              <View></View>
+              <PictureCard/>
             </View>
 
             {/* <SearchInput /> */}

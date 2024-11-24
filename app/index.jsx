@@ -18,7 +18,7 @@ import { signIn, getCurrentUser, signOut } from "../lib/appwrite";
 import { useGlobalContext } from "../contex/GlobalProvider";
 
 export default function App() {
-  //  return <Redirect href="./(tabs)/home" />;
+   return <Redirect href="./(tabs)/home" />;
   const { isLoading, isLoggedIn } = useGlobalContext();
   // if (!isLoading && isLoggedIn) return <Redirect href="./(tabs)/home" />;
   const { setUser, setIsLoggedIn } = useGlobalContext();
