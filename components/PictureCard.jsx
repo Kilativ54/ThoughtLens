@@ -27,8 +27,7 @@ export const PictureCard = () => {
 
 const styles = StyleSheet.create({
   containerPost: {
-    marginRight: "auto",
-    marginLeft: "auto",
+
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

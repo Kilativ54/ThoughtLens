@@ -12,8 +12,7 @@ import { useState } from "react";
 import { signOut } from "../../lib/appwrite";
 import { router } from "expo-router";
 import { Alert } from "react-native";
-import {PictureCard} from "../../components/PictureCard";
-
+import { PictureCard } from "../../components/PictureCard";
 
 const Home = () => {
   const { data: posts, refetch } = useAppwrite(getAllPosts);
@@ -22,7 +21,6 @@ const Home = () => {
 
   const [refreshing, setRefreshing] = useState(false);
   const { isLoading, isLoggedIn } = useGlobalContext();
-  
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -30,11 +28,11 @@ const Home = () => {
     setRefreshing(false);
   };
   const logout = async () => {
-   await signOut();
-   setUser(null);
-   setIsLoggedIn(false);
+    await signOut();
+    setUser(null);
+    setIsLoggedIn(false);
 
-  router.replace("/");
+    router.replace("/");
   };
 
   return (
@@ -64,7 +62,18 @@ const Home = () => {
                   />
                 </TouchableOpacity>
               </View>
-              <PictureCard/>
+              <View style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <View style={styles.mainContain}>
+                  <View style={styles.containetImageProfile}>
+                    <Image
+                      source={require("../../assets/images/profile.png")}
+                      resizeMode="contain"
+                      style={styles.imageProfile}
+                    />
+                  </View>
+                  <PictureCard />
+                </View>
+              </View>
             </View>
 
             {/* <SearchInput /> */}
@@ -100,9 +109,23 @@ const styles = StyleSheet.create({
     position: "relative",
     flexDirection: "row",
   },
+  mainContain: {
+    display: "flex",
+    flexDirection: "column",
+    paddingLeft: 16,
+    paddingRight: 16,
+  },
   logoOut: {
     width: 24,
     height: 24,
     left: 120,
+  },
+  imageProfile: {
+    width: 60,
+    height: 60,
+    borderRadius: 16,
+  },
+  containetImageProfile: {
+    marginTop: 32,
   },
 });
