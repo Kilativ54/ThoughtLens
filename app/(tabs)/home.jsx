@@ -62,7 +62,13 @@ const Home = () => {
                   />
                 </TouchableOpacity>
               </View>
-              <View style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+              <View
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 <View style={styles.mainContain}>
                   <View style={styles.containetImageProfile}>
                     <Image
@@ -70,6 +76,10 @@ const Home = () => {
                       resizeMode="contain"
                       style={styles.imageProfile}
                     />
+                    <View style={{ marginLeft: 8 }}>
+                      <Text style={styles.textProfileName}>John Doe</Text>
+                      <Text style={styles.textProfileEmail}>qwwer@example.com</Text>
+                    </View>
                   </View>
                   <PictureCard />
                 </View>
@@ -127,5 +137,22 @@ const styles = StyleSheet.create({
   },
   containetImageProfile: {
     marginTop: 32,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  textProfileName: {
+    fontSize: 13,
+    fontWeight: "medium",
+
+    color: "#212121",
+    fontFamily: "Roboto-Bold",
+  },
+  textProfileEmail: {
+    fontSize: 11,
+    fontWeight: "regular",
+
+    color: "#212121",
+    fontFamily: "Roboto-Regular",
   },
 });

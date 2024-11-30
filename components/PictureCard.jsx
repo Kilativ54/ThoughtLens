@@ -7,7 +7,7 @@ export const PictureCard = () => {
       <View>
         <Image
           source={require("../assets/images/profile.png")}
-          style={{ width: 343, height: 240 }}
+          style={{ width: 343, height: 240, borderRadius: 8 }}
           resizeMode="cover"
         />
       </View>
