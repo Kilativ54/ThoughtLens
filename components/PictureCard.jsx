@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
 
-export const PictureCard = () => {
+export const PictureCard = ({ thumbnail }) => {
   return (
     <View style={styles.containerPost}>
       <View>
         <Image
-          source={require("../assets/images/profile.png")}
+          source={{ uri: thumbnail }}
           style={{ width: 343, height: 240, borderRadius: 8 }}
           resizeMode="cover"
         />

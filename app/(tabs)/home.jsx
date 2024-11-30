@@ -16,11 +16,11 @@ import { PictureCard } from "../../components/PictureCard";
 
 const Home = () => {
   const { data: posts, refetch } = useAppwrite(getAllPosts);
-  const { data: latestPosts } = useAppwrite(getLatestPosts);
+  
   const { user, setUser, setIsLoggedIn } = useGlobalContext();
 
   const [refreshing, setRefreshing] = useState(false);
-  const { isLoading, isLoggedIn } = useGlobalContext();
+  
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -40,15 +40,34 @@ const Home = () => {
       <FlatList
         data={posts}
         keyExtractor={(item) => item.$id}
-        // renderItem={({ item }) => (
-        //   <VideoCard
-        //     title={item.title}
-        //     thumbnail={item.thumbnail}
-        //     video={item.video}
-        //     creator={item.creator.username}
-        //     avatar={item.creator.avatar}
-        //   />
-        // )}
+        renderItem={({ item }) => (
+          <View
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <View style={styles.mainContain}>
+              <View style={styles.containetImageProfile}>
+                <Image
+                  source={{ uri: item.creator.avatar }}
+                  resizeMode="contain"
+                  style={styles.imageProfile}
+                />
+                <View style={{ marginLeft: 8 }}>
+                  <Text style={styles.textProfileName}>
+                    {item.creator.username}
+                  </Text>
+                  <Text style={styles.textProfileEmail}>
+                    {item.creator.email}
+                  </Text>
+                </View>
+              </View>
+              <PictureCard thumbnail={item.thumbnail} />
+            </View>
+          </View>
+        )}
         ListHeaderComponent={() => (
           <View>
             <View>
@@ -61,28 +80,6 @@ const Home = () => {
                     style={styles.logoOut}
                   />
                 </TouchableOpacity>
-              </View>
-              <View
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <View style={styles.mainContain}>
-                  <View style={styles.containetImageProfile}>
-                    <Image
-                      source={require("../../assets/images/profile.png")}
-                      resizeMode="contain"
-                      style={styles.imageProfile}
-                    />
-                    <View style={{ marginLeft: 8 }}>
-                      <Text style={styles.textProfileName}>John Doe</Text>
-                      <Text style={styles.textProfileEmail}>qwwer@example.com</Text>
-                    </View>
-                  </View>
-                  <PictureCard />
-                </View>
               </View>
             </View>
 
