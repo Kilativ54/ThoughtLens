@@ -9,8 +9,35 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { signOut } from "../../lib/appwrite";
+
+import { FlatList, RefreshControl } from "react-native";
+
+import { useGlobalContext } from "../../contex/GlobalProvider";
+
+import useAppwrite from "../../lib/useAppwrite";
+import { getAllPosts, getLatestPosts } from "../../lib/appwrite";
+import { useState } from "react";
+import { router } from "expo-router";
+import { Alert } from "react-native";
+import { PictureCard } from "../../components/PictureCard";
 
 const Profile = () => {
+  const { data: posts, refetch } = useAppwrite(getAllPosts);
+  const { user, setUser, setIsLoggedIn } = useGlobalContext();
+  const [refreshing, setRefreshing] = useState(false);
+  const logout = async () => {
+    await signOut();
+    setUser(null);
+    setIsLoggedIn(false);
+
+    router.replace("/");
+  };
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  };
   return (
     <SafeAreaView contentContainerStyle={{ height: "100%" }}>
       <ScrollView>
@@ -45,6 +72,13 @@ const Profile = () => {
                 width={25}
                 height={25}
               />
+              <TouchableOpacity onPress={logout}>
+                <Image
+                  source={require("../../assets/icons/log-out.png")}
+                  resizeMode="contain"
+                  style={styles.logoOut}
+                />
+              </TouchableOpacity>
             </View>
             <Text style={styles.name}>John Doe</Text>
           </View>
@@ -142,7 +176,7 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: -60,
-    marginBottom: 32,
+   
   },
   avatar: {
     borderRadius: 16,
@@ -159,7 +193,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "500",
     textAlign: "center",
-    marginTop: 32,
+    marginTop: 8,
     marginBottom: 33,
   },
   v3_27: {
@@ -167,6 +201,12 @@ const styles = StyleSheet.create({
     height: 44,
     backgroundColor: "rgba(255,255,255,1)",
     position: "relative",
+  },
+  logoOut: {
+    width: 24,
+    height: 24,
+    left: 220,
+    top: -35,
   },
   v3_28: {
     width: 375,
