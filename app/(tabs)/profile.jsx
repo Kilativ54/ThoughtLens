@@ -7,56 +7,65 @@ import {
   View,
   Image,
   TouchableOpacity,
+  FlatList,
+  RefreshControl,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { signOut } from "../../lib/appwrite";
 
-import { FlatList, RefreshControl } from "react-native";
-
 import { useGlobalContext } from "../../contex/GlobalProvider";
 
 import useAppwrite from "../../lib/useAppwrite";
-import { getAllPosts, getLatestPosts } from "../../lib/appwrite";
+import { getAllPosts } from "../../lib/appwrite";
 import { useState } from "react";
 import { router } from "expo-router";
-import { Alert } from "react-native";
 import { PictureCard } from "../../components/PictureCard";
 
 const Profile = () => {
   const { data: posts, refetch } = useAppwrite(getAllPosts);
   const { user, setUser, setIsLoggedIn } = useGlobalContext();
   const [refreshing, setRefreshing] = useState(false);
-  const logout = async () => {
-    await signOut();
-    setUser(null);
-    setIsLoggedIn(false);
 
-    router.replace("/");
+  const logout = async () => {
+    try {
+      await signOut();
+      setUser(null);
+      setIsLoggedIn(false);
+      router.replace("/");
+    } catch (error) {
+      Alert.alert("Error", "Failed to log out. Please try again.");
+    }
   };
+
   const onRefresh = async () => {
     setRefreshing(true);
-    await refetch();
-    setRefreshing(false);
+    try {
+      await refetch();
+    } catch (error) {
+      Alert.alert("Error", "Failed to refresh posts.");
+    } finally {
+      setRefreshing(false);
+    }
   };
+
   return (
-    <SafeAreaView contentContainerStyle={{ height: "100%" }}>
-      <ScrollView>
-        {/* Background */}
+    <SafeAreaView style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.scrollContainer}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        
         <View style={styles.mainContain}>
           <Image
-            resizeMode={"cover"}
+            resizeMode="cover"
             source={require("../../assets/images/Photo BG.jpg")}
             style={styles.imageBackgr}
           />
-          {/* White section */}
-          {/* <CustomButton title={"Registration"} /> */}
+          {/* Profile Section */}
           <View style={styles.styleContainerLogin}>
-            {/* Password Input */}
-            {/* <View style={styles.v3_64}>
-            <View style={styles.v3_65}></View>
-            <Text style={styles.v3_66}>Пароль</Text>
-            <Text style={styles.v3_67}>Показати</Text>
-          </View> */}
             <View style={styles.containerAvatar}>
               <Image
                 style={styles.avatar}
@@ -80,45 +89,22 @@ const Profile = () => {
                 />
               </TouchableOpacity>
             </View>
-            <Text style={styles.name}>John Doe</Text>
+            <Text style={styles.name}>{user?.name || "John Doe"}</Text>
+
+            <FlatList
+              data={posts}
+              keyExtractor={(item) => item.$id}
+              renderItem={({ item }) => (
+                <View style={styles.postContainer}>
+                  <PictureCard thumbnail={item.thumbnail} />
+                </View>
+              )}
+              style={styles.postList}
+              ListEmptyComponent={
+                <Text style={styles.emptyMessage}>No posts available</Text>
+              }
+            />
           </View>
-
-          {/* Header */}
-          {/* <View style={styles.v3_27}>
-            <View style={styles.v3_29}></View>
-          </View> */}
-
-          {/* Registration Title */}
-          {/* <View style={styles.v3_49}>
-            <Text style={styles.v3_51}>Registration</Text>
-          </View> */}
-
-          {/* Login Input */}
-          {/* <View style={styles.v3_56}>
-            <View style={styles.v3_57}></View>
-            <Text style={styles.v3_58}>Логін</Text>
-          </View> */}
-
-          {/* Email Input */}
-          {/* <View style={styles.v3_60}>
-            <View style={styles.v3_61}></View>
-            <Text style={styles.v3_62}>Адреса електронної пошти</Text>
-          </View> */}
-
-          {/* Password Input */}
-          {/* <View style={styles.v3_64}>
-            <View style={styles.v3_65}></View>
-            <Text style={styles.v3_66}>Пароль</Text>
-            <Text style={styles.v3_67}>Показати</Text>
-          </View> */}
-
-          {/* Register Button */}
-          {/* <TouchableOpacity style={styles.v3_201}>
-            <Text style={styles.v3_202}>Зареєстуватися</Text>
-          </TouchableOpacity> */}
-
-          {/* Already have an account */}
-          {/* <Text style={styles.v3_203}>Вже є акаунт? Увійти</Text> */}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -128,55 +114,36 @@ const Profile = () => {
 export default Profile;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  scrollContainer: {
+    flexGrow: 1,
+  },
   mainContain: {
     width: "100%",
     minHeight: 1000,
-    // backgroundColor: "rgba(255,255,255,1)",
     position: "relative",
   },
   imageBackgr: {
     width: "100%",
-    minHeight: 549,
+    minHeight: 250,
     position: "absolute",
-    // resizeMode: "cover",
   },
   styleContainerLogin: {
     width: "100%",
-    height: 680,
-    backgroundColor: "rgba(255,255,255,1)",
-    position: "relative",
-    marginTop: "auto",
+    backgroundColor: "#fff",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-  },
-  linkSignUp: {
-    display: "flex",
-    flexDirection: "row",
-    gap: 2,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  marginButtonPasword: {
-    marginBottom: 43,
-  },
-  textSign: {
-    fontFamily: "Roboto-Medium",
-    color: "#212121",
-    fontSize: 30,
-    fontWeight: "500",
-    textAlign: "center",
-    marginBottom: 33,
-  },
-  textUnderButtom: {
-    fontFamily: "Roboto-Regular",
-    color: "rgba(27,67,113,1)",
-    fontSize: 16,
+    marginTop: 200,
+    padding: 20,
+    flex: 1,
   },
   containerAvatar: {
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: -60,
-   
   },
   avatar: {
     borderRadius: 16,
@@ -196,129 +163,23 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 33,
   },
-  v3_27: {
-    width: 375,
-    height: 44,
-    backgroundColor: "rgba(255,255,255,1)",
-    position: "relative",
+  postContainer: {
+    alignItems: "center",
+    marginVertical: 10,
+  },
+  postList: {
+    marginTop: 10,
+  },
+  emptyMessage: {
+    textAlign: "center",
+    fontSize: 16,
+    color: "#888",
+    marginTop: 20,
   },
   logoOut: {
     width: 24,
     height: 24,
     left: 220,
     top: -35,
-  },
-  v3_28: {
-    width: 375,
-    height: 46,
-    position: "absolute",
-    top: 2,
-    left: 0,
-    resizeMode: "cover",
-  },
-  v3_29: {
-    width: 375,
-    height: 44,
-    backgroundColor: "rgba(0,0,0,1)",
-  },
-  v3_49: {
-    width: 343,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    position: "absolute",
-    top: 355,
-    left: 16,
-  },
-  v3_51: {
-    color: "rgba(33,33,33,1)",
-    fontSize: 30,
-    fontWeight: "500",
-    textAlign: "center",
-  },
-  v3_56: {
-    position: "absolute",
-    top: 423,
-    left: 16,
-    width: 343,
-    height: 50,
-  },
-  v3_57: {
-    width: 343,
-    height: 50,
-    backgroundColor: "rgba(246,246,246,1)",
-    borderWidth: 1,
-    borderColor: "rgba(231,231,231,1)",
-  },
-  v3_58: {
-    position: "absolute",
-    top: 16,
-    left: 16,
-    color: "rgba(189,189,189,1)",
-    fontSize: 16,
-  },
-  v3_60: {
-    position: "absolute",
-    top: 489,
-    left: 16,
-    width: 343,
-    height: 50,
-  },
-  v3_61: {
-    width: 343,
-    height: 50,
-    backgroundColor: "rgba(246,246,246,1)",
-    borderWidth: 1,
-    borderColor: "rgba(231,231,231,1)",
-  },
-  v3_62: {
-    position: "absolute",
-    top: 16,
-    left: 16,
-    color: "rgba(189,189,189,1)",
-    fontSize: 16,
-  },
-  v3_64: {
-    // position: "absolute",
-    // top: 555,
-    // left: 16,
-    width: 343,
-    height: 50,
-  },
-  v3_65: {
-    width: 343,
-    height: 50,
-    backgroundColor: "rgba(246,246,246,1)",
-    borderWidth: 1,
-    borderColor: "rgba(231,231,231,1)",
-  },
-  v3_66: {
-    // position: "absolute",
-    // top: 16,
-    // left: 16,
-    color: "rgba(189,189,189,1)",
-    fontSize: 16,
-  },
-  v3_67: {
-    // position: "absolute",
-    // top: 16,
-    // left: 255,
-    color: "rgba(27,67,113,1)",
-    fontSize: 16,
-  },
-  v3_201: {
-    width: 343,
-    height: 51,
-    backgroundColor: "rgba(255,108,0,1)",
-    borderRadius: 100,
-    position: "absolute",
-    top: 648,
-    left: 16,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  v3_202: {
-    color: "rgba(255,255,255,1)",
-    fontSize: 16,
   },
 });

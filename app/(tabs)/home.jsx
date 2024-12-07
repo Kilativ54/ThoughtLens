@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { FlatList, RefreshControl } from "react-native";
+import { FlatList, RefreshControl, ScrollView } from "react-native";
 // import VideoCard from "../components/VideoCard";
 // import { posts } from "../constants";
 import { useGlobalContext } from "../../contex/GlobalProvider";
@@ -16,11 +16,10 @@ import { PictureCard } from "../../components/PictureCard";
 
 const Home = () => {
   const { data: posts, refetch } = useAppwrite(getAllPosts);
-  
+
   const { user, setUser, setIsLoggedIn } = useGlobalContext();
 
   const [refreshing, setRefreshing] = useState(false);
-  
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -36,19 +35,34 @@ const Home = () => {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
+      {/* Fixed Header */}
+      <View style={styles.containerHeader}>
+        <Text style={styles.textHeader}>Publications</Text>
+        <TouchableOpacity onPress={logout}>
+          <Image
+            source={require("../../assets/icons/log-out.png")}
+            resizeMode="contain"
+            style={styles.logoOut}
+          />
+        </TouchableOpacity>
+      </View>
+
+      {/* List with Refresh Control */}
       <FlatList
         data={posts}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
-          <View
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <View style={styles.mainContain}>
+          <View style={styles.mainContain}>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "column",
+
+                backgroundColor: "rgba(255,255,255,1)",
+                width: 343,
+              }}
+            >
               <View style={styles.containetImageProfile}>
                 <Image
                   source={{ uri: item.creator.avatar }}
@@ -68,27 +82,10 @@ const Home = () => {
             </View>
           </View>
         )}
-        ListHeaderComponent={() => (
-          <View>
-            <View>
-              <View style={styles.containerHeader}>
-                <Text style={styles.textHeader}>Publications</Text>
-                <TouchableOpacity onPress={logout}>
-                  <Image
-                    source={require("../../assets/icons/log-out.png")}
-                    resizeMode="contain"
-                    style={styles.logoOut}
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-
-            {/* <SearchInput /> */}
-          </View>
-        )}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
+        contentContainerStyle={{ paddingTop: 60 }} // To add space for the fixed header
       />
     </SafeAreaView>
   );
@@ -106,21 +103,28 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   containerHeader: {
-    height: 44,
+    height: 60,
     width: "100%",
     borderBottomColor: "#BDBDBD",
     borderBottomWidth: 1,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    position: "relative",
+    position: "absolute",
+    top: 0,
+    zIndex: 10,
     flexDirection: "row",
+    backgroundColor: "rgba(255,255,255,1)",
   },
   mainContain: {
     display: "flex",
-    flexDirection: "column",
+
     paddingLeft: 16,
     paddingRight: 16,
+    backgroundColor: "rgba(255,255,255,1)",
+
+    alignItems: "center",
+    justifyContent: "center",
   },
   logoOut: {
     width: 24,
