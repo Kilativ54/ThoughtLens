@@ -33,15 +33,15 @@ const Create = () => {
           />
         </TouchableOpacity>
       </View>
-      <TouchableOpacity>
-        <View style={styles.loadContainer}>
+      <View style={styles.loadContainer}>
+        <TouchableOpacity>
           <Image
             source={require("../../assets/images/LoadFoto.jpg")}
             resizeMode="contain"
             style={{ width: 343, height: 240, borderRadius: 8 }}
           />
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
@@ -112,9 +112,10 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto-Regular",
   },
   loadContainer: {
-    marginTop: 32,
+    marginTop: 92,
     marginBottom: 32,
     display: "flex",
+    justifyContent: "center",
     flexDirection: "row",
     alignItems: "center",
   },
