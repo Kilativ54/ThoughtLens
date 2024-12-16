@@ -1,19 +1,25 @@
-import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image} from 'react-native'
-import React from 'react'
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  TouchableOpacity,
+  Image,
+} from "react-native";
+import React from "react";
 import { signOut } from "../../lib/appwrite";
 import { router } from "expo-router";
 import { useGlobalContext } from "../../contex/GlobalProvider";
 
-
 const Create = () => {
-   const { user, setUser, setIsLoggedIn } = useGlobalContext();
-   const logout = async () => {
-     await signOut();
-     setUser(null);
-     setIsLoggedIn(false);
+  const { user, setUser, setIsLoggedIn } = useGlobalContext();
+  const logout = async () => {
+    await signOut();
+    setUser(null);
+    setIsLoggedIn(false);
 
-     router.replace("/");
-   };
+    router.replace("/");
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -29,9 +35,9 @@ const Create = () => {
       </View>
     </SafeAreaView>
   );
-}
+};
 
-export default Create
+export default Create;
 
 const styles = StyleSheet.create({
   textHeader: {
@@ -69,7 +75,7 @@ const styles = StyleSheet.create({
   logoOut: {
     width: 24,
     height: 24,
-    left: 120,
+    left: 91,
   },
   imageProfile: {
     width: 60,
