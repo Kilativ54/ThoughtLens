@@ -33,6 +33,15 @@ const Create = () => {
           />
         </TouchableOpacity>
       </View>
+      <TouchableOpacity>
+        <View style={styles.loadContainer}>
+          <Image
+            source={require("../../assets/images/LoadFoto.jpg")}
+            resizeMode="contain"
+            style={{ width: 343, height: 240, borderRadius: 8 }}
+          />
+        </View>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -101,5 +110,12 @@ const styles = StyleSheet.create({
 
     color: "#212121",
     fontFamily: "Roboto-Regular",
+  },
+  loadContainer: {
+    marginTop: 32,
+    marginBottom: 32,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
