@@ -40,6 +40,7 @@ const Create = () => {
             resizeMode="contain"
             style={{ width: 343, height: 240, borderRadius: 8 }}
           />
+          <Text style={styles.loadText}>Upload a photo</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -118,5 +119,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
     alignItems: "center",
+  },
+  loadText: {
+    fontSize: 16,
+    fontWeight: "medium",
+    lineHeight: 22,
+    color: "#BDBDBD",
+    fontFamily: "Roboto-Regular",
+    textAlign: "left",
+    marginTop: 8,
   },
 });
