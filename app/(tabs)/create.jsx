@@ -42,6 +42,9 @@ const Create = () => {
           />
           <Text style={styles.loadText}>Upload a photo</Text>
         </TouchableOpacity>
+        <TouchableOpacity>
+          <Text style={styles.loadTextName}>Name...</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -117,7 +120,7 @@ const styles = StyleSheet.create({
     marginBottom: 32,
     display: "flex",
     justifyContent: "center",
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center",
   },
   loadText: {
@@ -128,5 +131,24 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto-Regular",
     textAlign: "left",
     marginTop: 8,
+  },
+  loadTextName: {
+    fontSize: 16,
+    fontWeight: "medium",
+    lineHeight: 22,
+    color: "#BDBDBD",
+    fontFamily: "Roboto-Regular",
+    textAlign: "left",
+    marginTop: 48,
+    display: "flex",
+    justifyContent: "left",
+    flexDirection: "row",
+    alignItems: "center",
+    width: 343,
+    height: 50,
+    justifyContent: 'flex-start',
+    borderBottomColor: '#BDBDBD',
+    borderBottomWidth: 1,
+
   },
 });
